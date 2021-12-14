@@ -8,6 +8,9 @@ import StatusBar from "../sprites/statusBar";
 import CreditText from "../sprites/creditText";
 import _ from "../i18n";
 import nearestSolver from "../solvers/nearestSolver";
+import randomSolver from "../solvers/randomSolver";
+import idiotSolver from "../solvers/idiotSolver";
+import defaultSolver from "../solvers/defaultSolver";
 import RawSVGFile from "../lib/RawSVGFile";
 
 declare type NeighbourData = {
@@ -288,6 +291,8 @@ export default class MainScene extends Phaser.Scene {
         cat.on("win", () => {
             this.state = GameState.WIN;
         });
+        const solver = document.getElementById("solver");
+        solver.textContent = "nearest";
         cat.solver = nearestSolver;
         this.cat = cat;
         this.add.existing(cat);
@@ -303,6 +308,16 @@ export default class MainScene extends Phaser.Scene {
         let resetButton = new ResetButton(this);
         this.add.existing(resetButton);
         resetButton.on("pointerup", () => {
+            const modeTxt = document.getElementById("solver").textContent;
+            if (modeTxt == "default") {
+                this.cat.solver = defaultSolver;
+            } else if (modeTxt == "idoit") {
+                this.cat.solver = idiotSolver;
+            } else if (modeTxt == "random") {
+                this.cat.solver = randomSolver;
+            } else if (modeTxt == "nearest") {
+                this.cat.solver = nearestSolver;
+            }
             this.reset();
         });
     }
