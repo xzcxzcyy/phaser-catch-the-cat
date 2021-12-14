@@ -311,7 +311,7 @@ export default class MainScene extends Phaser.Scene {
             const modeTxt = document.getElementById("solver").textContent;
             if (modeTxt == "default") {
                 this.cat.solver = defaultSolver;
-            } else if (modeTxt == "idoit") {
+            } else if (modeTxt == "idiot") {
                 this.cat.solver = idiotSolver;
             } else if (modeTxt == "random") {
                 this.cat.solver = randomSolver;
